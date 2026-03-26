@@ -54,9 +54,9 @@ dotenv = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jp26jp/flex-mls"
-Documentation = "https://github.com/jp26jp/flex-mls/tree/main/docs"
-Repository = "https://github.com/jp26jp/flex-mls"
+Homepage = "https://github.com/theperrygroup/flex-mls"
+Documentation = "https://theperrygroup.github.io/flex-mls/"
+Repository = "https://github.com/theperrygroup/flex-mls"
 
 [tool.setuptools]
 include-package-data = true

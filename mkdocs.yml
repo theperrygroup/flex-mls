@@ -1,5 +1,8 @@
 site_name: flex_mls
 site_description: Python client library for the Spark RESO Web API used by Flexmls.
+site_url: https://theperrygroup.github.io/flex-mls/
+repo_url: https://github.com/theperrygroup/flex-mls
+repo_name: theperrygroup/flex-mls
 theme:
   name: material
 
