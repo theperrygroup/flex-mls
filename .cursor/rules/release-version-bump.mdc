@@ -1,0 +1,17 @@
+---
+description: Require a version bump before publishing
+alwaysApply: true
+---
+
+# Release Version Bumps
+
+Before any publish or release task for this repository:
+
+- Bump the package version instead of reusing the previous release version.
+- Keep version strings in sync across `pyproject.toml`, `flex_mls/__init__.py`, and `flex_mls/base_client.py`.
+- Make sure the release tag matches the package version in `vX.Y.Z` format.
+- Do not consider a publish task complete until the version bump is included in the same change.
+
+Example:
+
+- If the next release is `0.1.1`, update all version references to `0.1.1` and publish from tag `v0.1.1`.

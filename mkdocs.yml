@@ -1,0 +1,46 @@
+site_name: flex_mls
+site_description: Python client library for the Spark RESO Web API used by Flexmls.
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            heading_level: 2
+            show_source: false
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Overview: getting-started/index.md
+      - Installation: getting-started/installation.md
+      - Authentication: getting-started/authentication.md
+      - Quickstart: getting-started/quickstart.md
+  - Guides:
+      - Overview: guides/index.md
+      - Coverage Plan: guides/coverage-plan.md
+      - Examples: guides/examples.md
+      - Replication: guides/replication.md
+      - Troubleshooting: guides/troubleshooting.md
+  - API Reference:
+      - Overview: api/index.md
+      - Client: api/client.md
+      - Properties: api/properties.md
+      - Members: api/members.md
+      - Offices: api/offices.md
+      - Open Houses: api/openhouses.md
+      - Media: api/media.md
+      - Rooms: api/rooms.md
+      - Units: api/units.md
+      - Green Verification: api/green-verification.md
+      - Power Production: api/power-production.md
+      - Lookup: api/lookup.md
+  - Reference:
+      - Overview: reference/index.md
+      - Data Types: reference/data-types.md
+      - Exceptions: reference/exceptions.md
+      - Changelog: reference/changelog.md

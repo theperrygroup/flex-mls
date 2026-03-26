@@ -1,0 +1,13 @@
+---
+description: Require 100% line and branch coverage
+alwaysApply: true
+---
+
+# Coverage Requirements
+
+- Treat 100% line coverage and 100% branch coverage as project requirements.
+- Add or update tests in the same task for every behavior change, bug fix, and public API addition.
+- Prefer direct tests for the touched module plus assertions for happy paths, validation failures, error handling, retries, refresh flows, and other branch logic.
+- Run `pytest` after Python or test changes because coverage is configured in `pyproject.toml`.
+- Do not consider work complete if new or changed code reduces coverage or leaves uncovered branches unless the user explicitly approves a follow-up gap.
+- Prioritize shared clients and helper modules first when closing existing coverage gaps because they affect the widest surface area.
