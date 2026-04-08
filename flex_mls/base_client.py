@@ -33,7 +33,7 @@ DEFAULT_BASE_URL = "https://replication.sparkapi.com/Version/3/Reso/OData"
 DEFAULT_TIMEOUT_SECONDS = 30.0
 DEFAULT_MAX_RETRIES = 3
 DEFAULT_RETRY_BACKOFF_SECONDS = 0.5
-DEFAULT_USER_AGENT = "flex-mls-python-client/0.1.1"
+DEFAULT_USER_AGENT = "flex-mls-python-client/0.1.2"
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 
