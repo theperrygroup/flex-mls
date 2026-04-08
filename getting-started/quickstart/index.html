@@ -1226,6 +1226,18 @@ page = client.properties.list_with_expansions(
 for property_record in page.get(&quot;value&quot;, []):
     print(property_record.get(&quot;ListingKey&quot;))
 </code></pre>
+<p>For strict property lookups, use the public helpers on <code>client.properties</code>:</p>
+<pre><code class="language-python">address_matches = client.properties.list_by_address(
+    unparsed_address=&quot;123 Main St&quot;,
+    city=&quot;Salt Lake City&quot;,
+    state_or_province=&quot;UT&quot;,
+    postal_code=&quot;84101-1234&quot;,
+)
+
+parcel_matches = client.properties.list_by_parcel(parcel_number=&quot;06-079-0012&quot;)
+</code></pre>
+<p><code>list_by_parcel()</code> performs exact <code>ParcelNumber</code> equality and does not apply
+normalization variants by default.</p>
 
 
 
