@@ -33,7 +33,7 @@ DEFAULT_BASE_URL = "https://replication.sparkapi.com/Version/3/Reso/OData"
 DEFAULT_TIMEOUT_SECONDS = 30.0
 DEFAULT_MAX_RETRIES = 3
 DEFAULT_RETRY_BACKOFF_SECONDS = 0.5
-DEFAULT_USER_AGENT = "flex-mls-python-client/0.1.0"
+DEFAULT_USER_AGENT = "flex-mls-python-client/0.1.1"
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 
@@ -147,14 +147,18 @@ class BaseClient:
 
         if self.auth is None:
             raise AuthenticationError(
-                "No authentication configuration is available for this client."
+                "No authentication configuration is available. Provide an "
+                "`access_token`, set `FLEX_MLS_ACCESS_TOKEN`, or configure OpenID "
+                "Connect with `client_id`, `client_secret`, and `redirect_uri` "
+                "before making API requests."
             )
 
         access_token = self.auth.get_access_token()
         if not access_token:
             raise AuthenticationError(
-                "No access token is available. Complete the OIDC flow or provide "
-                "a bearer token before making API requests."
+                "No access token is available for the configured authentication "
+                "strategy. Complete the OIDC flow or provide an `access_token` "
+                "before making API requests."
             )
 
         return f"Bearer {access_token}"

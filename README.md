@@ -29,6 +29,30 @@ for record in response.get("value", []):
     print(record.get("ListingKey"))
 ```
 
+## Strict Property Searches
+
+```python
+from flex_mls import FlexMlsClient
+
+client = FlexMlsClient(access_token="your-access-token")
+
+address_matches = client.properties.list_by_address(
+    unparsed_address="123 Main St",
+    city="Salt Lake City",
+    state_or_province="UT",
+    postal_code="84101-1234",
+    top=5,
+)
+
+parcel_matches = client.properties.list_by_parcel(parcel_number="06-079-0012")
+```
+
+`list_by_address()` performs exact `UnparsedAddress` and `City` matching, can add
+an exact `StateOrProvince`, and uses the first five characters of `postal_code`
+in a `startswith(PostalCode, ...)` clause. `list_by_parcel()` uses exact
+`ParcelNumber eq '...'` matching only and does not apply normalization variants
+by default.
+
 ## Documentation
 
 The package mirrors Spark's RESO documentation and adds Python-focused guides

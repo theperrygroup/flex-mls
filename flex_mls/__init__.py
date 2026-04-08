@@ -35,7 +35,7 @@ from flex_mls.properties import PropertiesClient
 from flex_mls.rooms import RoomsClient
 from flex_mls.units import UnitsClient
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "ApiError",

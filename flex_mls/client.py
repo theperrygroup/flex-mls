@@ -129,6 +129,24 @@ class FlexMlsClient:
         if auth is not None:
             return auth
 
+        oidc_settings = {
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "redirect_uri": redirect_uri,
+        }
+        provided_oidc_fields = [
+            field_name for field_name, value in oidc_settings.items() if value is not None
+        ]
+        if provided_oidc_fields and len(provided_oidc_fields) != len(oidc_settings):
+            missing_fields = [
+                field_name for field_name, value in oidc_settings.items() if value is None
+            ]
+            missing_fields_display = ", ".join(missing_fields)
+            raise ConfigurationError(
+                "Incomplete OpenID Connect configuration. Missing required field(s): "
+                f"{missing_fields_display}."
+            )
+
         if client_id and client_secret and redirect_uri:
             tokens: AuthTokens | None = None
             if access_token:

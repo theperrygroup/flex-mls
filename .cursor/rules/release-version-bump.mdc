@@ -11,6 +11,10 @@ Before any publish or release task for this repository:
 - Keep version strings in sync across `pyproject.toml`, `flex_mls/__init__.py`, and `flex_mls/base_client.py`.
 - Make sure the release tag matches the package version in `vX.Y.Z` format.
 - Do not consider a publish task complete until the version bump is included in the same change.
+- Publish from the `theperrygroup/flex-mls` repository.
+- Deploy documentation from GitHub Actions to the `gh-pages` branch.
+- For PyPI publishing, use the repository's configured `PYPI_API_TOKEN` GitHub secret or Trusted Publishing.
+- Never write PyPI token values into repository files, docs, or project memory.
 
 Example:
 

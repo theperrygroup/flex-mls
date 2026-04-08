@@ -13,7 +13,7 @@ import responses
 from flex_mls import FlexMlsClient
 from flex_mls.auth import BearerTokenAuth, OpenIdConnectAuth
 from flex_mls.base_client import DEFAULT_BASE_URL
-from flex_mls.exceptions import ConfigurationError
+from flex_mls.exceptions import AuthenticationError, ConfigurationError
 from flex_mls.models import AuthTokens
 
 
@@ -184,6 +184,48 @@ def test_direct_access_token_builds_a_bearer_auth_strategy() -> None:
 
     assert isinstance(client.auth, BearerTokenAuth)
     assert client.auth.access_token == "access-token"
+
+
+def test_incomplete_oidc_configuration_names_missing_fields() -> None:
+    """Partial OIDC constructor settings fail fast with clear missing fields."""
+
+    with pytest.raises(ConfigurationError) as exc_info:
+        FlexMlsClient(client_id="client-id")
+
+    assert "client_secret" in exc_info.value.message
+    assert "redirect_uri" in exc_info.value.message
+
+
+def test_missing_auth_configuration_raises_before_any_request(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Missing auth raises before any HTTP request is attempted."""
+
+    client = FlexMlsClient()
+    request_attempted = {"called": False}
+
+    def fail_request(**kwargs: Any) -> requests.Response:
+        """Fail if the transport tries to send an HTTP request.
+
+        Args:
+            **kwargs: Request arguments forwarded by the transport.
+
+        Raises:
+            AssertionError: Always, because no request should be attempted.
+        """
+
+        del kwargs
+        request_attempted["called"] = True
+        raise AssertionError("session.request should not be called")
+
+    monkeypatch.setattr(client.session, "request", fail_request)
+
+    with pytest.raises(AuthenticationError) as exc_info:
+        client.properties.list(top=1)
+
+    assert request_attempted["called"] is False
+    assert "access_token" in exc_info.value.message
+    assert "client_id" in exc_info.value.message
 
 
 def test_client_prefers_discovered_oidc_auth_from_environment(
